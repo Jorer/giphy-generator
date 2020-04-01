@@ -59,14 +59,17 @@ async function run() {
       core.debug(`Successfully queried GIPHY with query: ${query}, rating: ${rating}, and lang: ${lang}`);
 
       // Get the ID, title, and GIF URL for the GIF from the response
-      const gifIndex = Math.ceil(Math.random() * limit);
+      const gifIndex = Math.ceil(Math.random() * limit -1);
 
       core.debug(`gifIndex picked is: ${gifIndex}`);
 
+      const defaultTitle = 'not found';
+      const defaultUrl = 'https://media.giphy.com/media/5f2mqsGTHpe5a/giphy.gif';
+
       const {
-        title: gifTitle,
+        title: gifTitle = defaultTitle,
         images: {
-          original: {url: gifUrl}
+          original: {url: gifUrl = defaultUrl}
         }
       } = searchForGifResponse.data.data[gifIndex];
 
